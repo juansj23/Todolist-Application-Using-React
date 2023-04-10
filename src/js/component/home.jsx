@@ -2,13 +2,19 @@ import React, { useState } from "react";
 
 const Home = () => {
 	const [inputValue, setInputValue] = useState("");
+
 	const [todos, setTodos] = useState([]);
+
+	const removeItem = (taskId) => {
+		const newTodos = todos.filter((t, index) => index !== taskId);
+		setTodos(newTodos);
+	};
 
 	return (
 		<div className="container mt-5">
 			<h1 className="text-center">Todos</h1>
-			<ul>
-				<li>
+			<ul className="list-group list-group-flush shadow p-3 bg-body rounded-0 ">
+				<li className="list-group-item">
 					<input
 						type="text"
 						onChange={(e) => setInputValue(e.target.value)}
@@ -23,10 +29,22 @@ const Home = () => {
 					/>
 				</li>
 				{todos.map((t, index) => (
-					<li key={index}>{t}</li>
+					<li className="list-group-item  d-flex justify-content-between" key={index}>
+						{" "}
+						{t}{" "}
+						<button
+							type="button"
+							className="btn-close"
+							aria-label="Close"
+							onClick={(e) => {
+								removeItem(index);
+							}}
+						></button>
+					</li>
 				))}
+				<div className="text-muted"><small>{todos.length} items</small></div>
 			</ul>
-			<div>{todos.length} items</div>
+			
 		</div>
 	);
 };
