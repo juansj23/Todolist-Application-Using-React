@@ -43,9 +43,11 @@ const Home = () => {
 					</li>
 				))}
 				<div className="text-muted"><small>{todos.length} items</small></div>
+
 			</ul>
 			
 		</div>
+		
 	);
 };
 
